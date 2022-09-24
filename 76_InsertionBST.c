@@ -16,29 +16,29 @@ struct node* createNode(int data){
     return n; // Finally returning the created node
 }
 
-// void inOrder(struct node* root){
-//     if(root!=NULL){
-//         inOrder(root->left);
-//         printf("%d ", root->data);
-//         inOrder(root->right);
-//     }
-// }
+void insert(struct node *root, int key){
+   struct node *prev = NULL;
+   while(root!=NULL){
+       prev = root;
+       if(key==root->data){
+           printf("Cannot insert %d, already in BST", key);
+           return;
+       }
+       else if(key<root->data){
+           root = root->left;
+       }
+       else{
+           root = root->right;
+       }
+   }
+   struct node* new = createNode(key);
+   if(key<prev->data){
+       prev->left = new;
+   }
+   else{
+       prev->right = new;
+   }
 
-int isBST(struct node* root){
-    static struct node* prev = NULL;
-    if(root!= NULL){
-        if(!isBST(root->left)){
-            return 0;
-        }
-        if(prev!=NULL && root->data <= prev->data){
-            return 0;
-        }
-        prev = root;
-        return isBST(root->right);
-    }
-    else{
-        return 1;
-    }
 }
 
 int main(){
@@ -54,7 +54,7 @@ int main(){
     //     / \
     //    3   6
     //   / \
-    //  1   4 
+    //  1   4  
 
     // Linking the root node with left and right children
     p->left = p1;
@@ -62,12 +62,7 @@ int main(){
     p1->left = p3;
     p1->right = p4;
 
-    if(isBST(p)){
-        printf("This is a bst" );
-    }
-    else{
-        printf("This is not a bst");
-    }
-
+    insert(p, 16);
+    printf("%d", p->right->right->data);
     return 0;
 }

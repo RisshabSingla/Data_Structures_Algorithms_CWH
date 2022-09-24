@@ -16,28 +16,18 @@ struct node* createNode(int data){
     return n; // Finally returning the created node
 }
 
-// void inOrder(struct node* root){
-//     if(root!=NULL){
-//         inOrder(root->left);
-//         printf("%d ", root->data);
-//         inOrder(root->right);
-//     }
-// }
-
-int isBST(struct node* root){
-    static struct node* prev = NULL;
-    if(root!= NULL){
-        if(!isBST(root->left)){
-            return 0;
-        }
-        if(prev!=NULL && root->data <= prev->data){
-            return 0;
-        }
-        prev = root;
-        return isBST(root->right);
+struct node * search(struct node* root, int key){
+    if(root==NULL){
+        return NULL;
+    }
+    if(key==root->data){
+        return root;
+    }
+    else if(key<root->data){
+        return search(root->left, key);
     }
     else{
-        return 1;
+        return search(root->right, key);
     }
 }
 
@@ -54,7 +44,7 @@ int main(){
     //     / \
     //    3   6
     //   / \
-    //  1   4 
+    //  1   4  
 
     // Linking the root node with left and right children
     p->left = p1;
@@ -62,12 +52,12 @@ int main(){
     p1->left = p3;
     p1->right = p4;
 
-    if(isBST(p)){
-        printf("This is a bst" );
+    struct node* n = search(p, 10);
+    if(n!=NULL){
+    printf("Found: %d", n->data);
     }
     else{
-        printf("This is not a bst");
+        printf("Element not found");
     }
-
     return 0;
 }
