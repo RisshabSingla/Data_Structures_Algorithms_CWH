@@ -1,19 +1,21 @@
-#include<stdio.h>
-#include<malloc.h>
+#include <stdio.h>
+#include <malloc.h>
 
-struct node{
+struct node
+{
     int data;
-    struct node* left;
-    struct node* right;
+    struct node *left;
+    struct node *right;
 };
 
-struct node* createNode(int data){
-    struct node *n; // creating a node pointer
-    n = (struct node *) malloc(sizeof(struct node)); // Allocating memory in the heap
-    n->data = data; // Setting the data
-    n->left = NULL; // Setting the left and right children to NULL
-    n->right = NULL; // Setting the left and right children to NULL
-    return n; // Finally returning the created node
+struct node *createNode(int data)
+{
+    struct node *n;                                 // creating a node pointer
+    n = (struct node *)malloc(sizeof(struct node)); // Allocating memory in the heap
+    n->data = data;                                 // Setting the data
+    n->left = NULL;                                 // Setting the left and right children to NULL
+    n->right = NULL;                                // Setting the left and right children to NULL
+    return n;                                       // Finally returning the created node
 }
 
 // void inOrder(struct node* root){
@@ -24,25 +26,31 @@ struct node* createNode(int data){
 //     }
 // }
 
-int isBST(struct node* root){
-    static struct node* prev = NULL;
-    if(root!= NULL){
-        if(!isBST(root->left)){
+int isBST(struct node *root)
+{
+    static struct node *prev = NULL;
+    if (root != NULL)
+    {
+        if (!isBST(root->left))
+        {
             return 0;
         }
-        if(prev!=NULL && root->data <= prev->data){
+        if (prev != NULL && root->data <= prev->data)
+        {
             return 0;
         }
         prev = root;
         return isBST(root->right);
     }
-    else{
+    else
+    {
         return 1;
     }
 }
 
-int main(){
-     
+int main()
+{
+
     // Constructing the root node - Using Function (Recommended)
     struct node *p = createNode(5);
     struct node *p1 = createNode(3);
@@ -54,7 +62,7 @@ int main(){
     //     / \
     //    3   6
     //   / \
-    //  1   4 
+    //  1   4
 
     // Linking the root node with left and right children
     p->left = p1;
@@ -62,10 +70,12 @@ int main(){
     p1->left = p3;
     p1->right = p4;
 
-    if(isBST(p)){
-        printf("This is a bst" );
+    if (isBST(p))
+    {
+        printf("This is a bst");
     }
-    else{
+    else
+    {
         printf("This is not a bst");
     }
 

@@ -1,48 +1,57 @@
-#include<stdio.h>
-#include<malloc.h>
+#include <stdio.h>
+#include <malloc.h>
 
-struct node{
+struct node
+{
     int data;
-    struct node* left;
-    struct node* right;
+    struct node *left;
+    struct node *right;
 };
 
-struct node* createNode(int data){
-    struct node *n; // creating a node pointer
-    n = (struct node *) malloc(sizeof(struct node)); // Allocating memory in the heap
-    n->data = data; // Setting the data
-    n->left = NULL; // Setting the left and right children to NULL
-    n->right = NULL; // Setting the left and right children to NULL
-    return n; // Finally returning the created node
+struct node *createNode(int data)
+{
+    struct node *n;                                 // creating a node pointer
+    n = (struct node *)malloc(sizeof(struct node)); // Allocating memory in the heap
+    n->data = data;                                 // Setting the data
+    n->left = NULL;                                 // Setting the left and right children to NULL
+    n->right = NULL;                                // Setting the left and right children to NULL
+    return n;                                       // Finally returning the created node
 }
 
-void insert(struct node *root, int key){
-   struct node *prev = NULL;
-   while(root!=NULL){
-       prev = root;
-       if(key==root->data){
-           printf("Cannot insert %d, already in BST", key);
-           return;
-       }
-       else if(key<root->data){
-           root = root->left;
-       }
-       else{
-           root = root->right;
-       }
-   }
-   struct node* new = createNode(key);
-   if(key<prev->data){
-       prev->left = new;
-   }
-   else{
-       prev->right = new;
-   }
-
+void insert(struct node *root, int key)
+{
+    struct node *prev = NULL;
+    while (root != NULL)
+    {
+        prev = root;
+        if (key == root->data)
+        {
+            printf("Cannot insert %d, already in BST", key);
+            return;
+        }
+        else if (key < root->data)
+        {
+            root = root->left;
+        }
+        else
+        {
+            root = root->right;
+        }
+    }
+    struct node *new = createNode(key);
+    if (key < prev->data)
+    {
+        prev->left = new;
+    }
+    else
+    {
+        prev->right = new;
+    }
 }
 
-int main(){
-     
+int main()
+{
+
     // Constructing the root node - Using Function (Recommended)
     struct node *p = createNode(5);
     struct node *p1 = createNode(3);
@@ -54,7 +63,7 @@ int main(){
     //     / \
     //    3   6
     //   / \
-    //  1   4  
+    //  1   4
 
     // Linking the root node with left and right children
     p->left = p1;

@@ -1,31 +1,36 @@
-#include<stdio.h>
-#include<malloc.h>
+#include <stdio.h>
+#include <malloc.h>
 
-struct node{
+struct node
+{
     int data;
-    struct node* left;
-    struct node* right;
+    struct node *left;
+    struct node *right;
 };
 
-struct node* createNode(int data){
-    struct node *n; // creating a node pointer
-    n = (struct node *) malloc(sizeof(struct node)); // Allocating memory in the heap
-    n->data = data; // Setting the data
-    n->left = NULL; // Setting the left and right children to NULL
-    n->right = NULL; // Setting the left and right children to NULL
-    return n; // Finally returning the created node
+struct node *createNode(int data)
+{
+    struct node *n;                                 // creating a node pointer
+    n = (struct node *)malloc(sizeof(struct node)); // Allocating memory in the heap
+    n->data = data;                                 // Setting the data
+    n->left = NULL;                                 // Setting the left and right children to NULL
+    n->right = NULL;                                // Setting the left and right children to NULL
+    return n;                                       // Finally returning the created node
 }
 
-void postOrder(struct node* root){
-    if(root!=NULL){
+void postOrder(struct node *root)
+{
+    if (root != NULL)
+    {
         postOrder(root->left);
         postOrder(root->right);
         printf("%d ", root->data);
     }
 }
 
-int main(){
-     
+int main()
+{
+
     // Constructing the root node - Using Function (Recommended)
     struct node *p = createNode(4);
     struct node *p1 = createNode(1);
@@ -37,7 +42,7 @@ int main(){
     //     / \
     //    1   6
     //   / \
-    //  5   2  
+    //  5   2
 
     // Linking the root node with left and right children
     p->left = p1;

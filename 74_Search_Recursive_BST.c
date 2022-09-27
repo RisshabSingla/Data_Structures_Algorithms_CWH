@@ -1,38 +1,46 @@
-#include<stdio.h>
-#include<malloc.h>
+#include <stdio.h>
+#include <malloc.h>
 
-struct node{
+struct node
+{
     int data;
-    struct node* left;
-    struct node* right;
+    struct node *left;
+    struct node *right;
 };
 
-struct node* createNode(int data){
-    struct node *n; // creating a node pointer
-    n = (struct node *) malloc(sizeof(struct node)); // Allocating memory in the heap
-    n->data = data; // Setting the data
-    n->left = NULL; // Setting the left and right children to NULL
-    n->right = NULL; // Setting the left and right children to NULL
-    return n; // Finally returning the created node
+struct node *createNode(int data)
+{
+    struct node *n;                                 // creating a node pointer
+    n = (struct node *)malloc(sizeof(struct node)); // Allocating memory in the heap
+    n->data = data;                                 // Setting the data
+    n->left = NULL;                                 // Setting the left and right children to NULL
+    n->right = NULL;                                // Setting the left and right children to NULL
+    return n;                                       // Finally returning the created node
 }
 
-struct node * search(struct node* root, int key){
-    if(root==NULL){
+struct node *search(struct node *root, int key)
+{
+    if (root == NULL)
+    {
         return NULL;
     }
-    if(key==root->data){
+    if (key == root->data)
+    {
         return root;
     }
-    else if(key<root->data){
+    else if (key < root->data)
+    {
         return search(root->left, key);
     }
-    else{
+    else
+    {
         return search(root->right, key);
     }
 }
 
-int main(){
-     
+int main()
+{
+
     // Constructing the root node - Using Function (Recommended)
     struct node *p = createNode(5);
     struct node *p1 = createNode(3);
@@ -44,7 +52,7 @@ int main(){
     //     / \
     //    3   6
     //   / \
-    //  1   4  
+    //  1   4
 
     // Linking the root node with left and right children
     p->left = p1;
@@ -52,11 +60,13 @@ int main(){
     p1->left = p3;
     p1->right = p4;
 
-    struct node* n = search(p, 10);
-    if(n!=NULL){
-    printf("Found: %d", n->data);
+    struct node *n = search(p, 10);
+    if (n != NULL)
+    {
+        printf("Found: %d", n->data);
     }
-    else{
+    else
+    {
         printf("Element not found");
     }
     return 0;
